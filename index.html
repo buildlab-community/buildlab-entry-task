@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f6f2">
+  <meta name="description" content="A simple, private student task manager that saves tasks in your browser.">
+  <title>Studylist | Student Task Manager</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <a class="wordmark" href="#main" aria-label="Studylist home">
+        <span class="wordmark-mark" aria-hidden="true">S</span>
+        <span>studylist</span>
+      </a>
+      <p class="privacy-note"><span aria-hidden="true" class="privacy-dot"></span> Your tasks stay on this device</p>
+    </header>
+
+    <section class="intro" aria-labelledby="page-title">
+      <p class="eyebrow">YOUR PERSONAL STUDY SPACE</p>
+      <h1 id="page-title">Make room for<br><span>what matters.</span></h1>
+      <p class="intro-copy">Keep coursework in order, one task at a time.</p>
+    </section>
+
+    <section class="summary" aria-label="Task summary">
+      <article class="summary-item">
+        <span class="summary-label">All tasks</span>
+        <strong id="total-count" class="summary-value">0</strong>
+      </article>
+      <article class="summary-item">
+        <span class="summary-label">To do</span>
+        <strong id="pending-count" class="summary-value">0</strong>
+      </article>
+      <article class="summary-item">
+        <span class="summary-label">Completed</span>
+        <strong id="completed-count" class="summary-value">0</strong>
+      </article>
+    </section>
+
+    <section class="task-area" id="main" aria-labelledby="tasks-heading">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">STAY ON TRACK</p>
+          <h2 id="tasks-heading">Your tasks</h2>
+        </div>
+        <span id="task-count-label" class="task-count-label">0 tasks</span>
+      </div>
+
+      <form id="task-form" class="task-form" novalidate>
+        <label class="visually-hidden" for="task-title">New task title</label>
+        <input id="task-title" name="title" type="text" maxlength="160" placeholder="e.g. Read chapter 4" autocomplete="off" aria-describedby="form-feedback">
+        <button class="add-button" type="submit"><span aria-hidden="true">+</span> Add task</button>
+        <p id="form-feedback" class="form-feedback" role="status" aria-live="polite"></p>
+      </form>
+
+      <div class="task-toolbar">
+        <div class="filter-group" role="group" aria-label="Filter tasks">
+          <button class="filter-button is-active" type="button" data-filter="all" aria-pressed="true">All</button>
+          <button class="filter-button" type="button" data-filter="pending" aria-pressed="false">Pending</button>
+          <button class="filter-button" type="button" data-filter="completed" aria-pressed="false">Completed</button>
+        </div>
+        <div class="search-wrap">
+          <label class="visually-hidden" for="task-search">Search tasks</label>
+          <span class="search-icon" aria-hidden="true"></span>
+          <input id="task-search" type="search" placeholder="Search tasks" autocomplete="off">
+        </div>
+      </div>
+
+      <ul id="task-list" class="task-list" aria-live="polite" aria-relevant="additions removals text"></ul>
+      <div id="empty-state" class="empty-state" hidden>
+        <span class="empty-icon" aria-hidden="true">✳</span>
+        <h3 id="empty-title">A clear page is a fresh start.</h3>
+        <p id="empty-message">Add your first task above and make today count.</p>
+      </div>
+    </section>
+
+    <footer class="footer"><span>Small steps, steady progress.</span><span>Made for your next big thing.</span></footer>
+  </main>
+</body>
+</html>
