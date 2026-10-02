@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="A modern student task manager for organizing and tracking daily tasks."
+    >
+
+    <title>Student Task Manager</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="background-glow glow-one"></div>
+    <div class="background-glow glow-two"></div>
+
+    <main class="app">
+
+        <!-- HEADER -->
+        <header class="hero">
+
+            <div class="brand">
+                <div class="brand-icon">✓</div>
+
+                <div>
+                    <p class="eyebrow">STUDENT PRODUCTIVITY</p>
+                    <h1>Task Manager</h1>
+                </div>
+            </div>
+
+            <p class="hero-text">
+                Organize your tasks, track your progress, and stay focused.
+            </p>
+
+        </header>
+
+
+        <!-- ADD TASK -->
+        <section class="card add-card">
+
+            <div class="section-heading">
+                <div>
+                    <p class="section-label">NEW TASK</p>
+                    <h2>Add a task</h2>
+                </div>
+            </div>
+
+            <div class="task-form">
+
+                <label for="taskInput" class="sr-only">
+                    Enter a task
+                </label>
+
+                <input
+                    type="text"
+                    id="taskInput"
+                    placeholder="What do you need to accomplish?"
+                    autocomplete="off"
+                >
+
+                <button id="addTaskBtn" type="button">
+                    <span>+</span>
+                    Add Task
+                </button>
+
+            </div>
+
+            <p id="errorMessage" class="message error"></p>
+
+        </section>
+
+
+        <!-- STATISTICS -->
+        <section class="stats">
+
+            <article class="stat-card">
+                <div class="stat-icon total-icon">✓</div>
+
+                <div>
+                    <span id="totalTasks">0</span>
+                    <p>Total Tasks</p>
+                </div>
+            </article>
+
+
+            <article class="stat-card">
+                <div class="stat-icon pending-icon">◷</div>
+
+                <div>
+                    <span id="pendingTasks">0</span>
+                    <p>Pending</p>
+                </div>
+            </article>
+
+
+            <article class="stat-card">
+                <div class="stat-icon completed-icon">✓</div>
+
+                <div>
+                    <span id="completedTasks">0</span>
+                    <p>Completed</p>
+                </div>
+            </article>
+
+        </section>
+
+
+        <!-- TASK CONTROLS -->
+        <section class="card controls-card">
+
+            <div class="search-box">
+
+                <label for="searchInput" class="sr-only">
+                    Search tasks
+                </label>
+
+                <input
+                    type="search"
+                    id="searchInput"
+                    placeholder="Search your tasks..."
+                    autocomplete="off"
+                >
+
+                <button id="searchBtn" type="button">
+                    Search
+                </button>
+
+            </div>
+
+
+            <div class="filter-area">
+
+                <p class="filter-label">FILTER TASKS</p>
+
+                <div class="filters">
+
+                    <button
+                        class="filter-btn active"
+                        data-filter="all"
+                        type="button"
+                    >
+                        All
+                    </button>
+
+                    <button
+                        class="filter-btn"
+                        data-filter="pending"
+                        type="button"
+                    >
+                        Pending
+                    </button>
+
+                    <button
+                        class="filter-btn"
+                        data-filter="completed"
+                        type="button"
+                    >
+                        Completed
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- TASK LIST -->
+        <section class="card tasks-card">
+
+            <div class="tasks-header">
+
+                <div>
+                    <p class="section-label">YOUR WORK</p>
+                    <h2>My Tasks</h2>
+                </div>
+
+                <span id="taskCountBadge" class="task-badge">
+                    0 tasks
+                </span>
+
+            </div>
+
+
+            <ul id="taskList"></ul>
+
+
+            <div id="emptyState" class="empty-state">
+
+                <div class="empty-icon">✓</div>
+
+                <h3 id="emptyTitle">No tasks yet</h3>
+
+                <p id="emptyText">
+                    Add your first task above and start making progress.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- FOOTER -->
+        <footer>
+            <p>Student Task Manager</p>
+            <span>Built with HTML • CSS • JavaScript</span>
+        </footer>
+
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
