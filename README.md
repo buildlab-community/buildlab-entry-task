@@ -847,3 +847,69 @@ Learn. Solve. Build. Test. Explain. Improve.
 🚀 BuildLab
 
 Learn together. Build together. Grow together.
+
+
+=============================================
+# Student Task Manager
+
+A responsive Student Task Manager built with HTML, CSS, and JavaScript,for the buildLab EntryChallenge.
+
+## Features
+
+- Add new tasks
+- View all tasks
+- Mark tasks as complete
+- Reopen completed tasks
+- Delete tasks
+- Search tasks with case-intensitive search
+- Filter tasks by All, Pending, or Completed
+- Dynamic Total, Pending, and Completed counters
+- Save tasks using browser LocalStroge
+- Responsive design for desktop, tablet, and mobile
+- Empty states and validationfor invalid input
+
+## Technologies Used
+- HTML
+- CSS
+- JavaScript
+- Browser LocalStorage
+
+## How to Run 
+1. Clone or download this repository.
+2. Open the project folder in VS Code.
+3. Open 'index.html' in a browser.
+4. Start adding and managing tasks.
+
+No backend, database, API, or frontend framework is required.
+
+## Data Persistence
+
+Tasks are stored in the browser using LocalStorage. This means tasks remain available 
+after refreshing the page in the same browser.
+
+## AI Usage
+
+AI tools were used during development to help with code structure, styling ideas,
+debugging, and explanations. The code was reviewed, tested, and adapted during development, and the final project was tested manually against the challenge requirements.
+
+## Testing
+
+The application wastested for:
+
+- Adding multiple tasks
+- Completing and reopening tasks
+- Deleting tasks
+- Searching for tasks
+- Case-intensive search
+- Filtering by status
+- Updating tasks counters
+- Refreshing the page and checking LocalStorage persistence
+- Empty task input
+- No search results
+- Responsive layout
+
+## Known Limitations
+
+- Tasks are stored only in the browser's LocalStorage.
+- There is no backend or user authentication.
+- Clearing the browser's LocalStoragewill remove saved tasks.
