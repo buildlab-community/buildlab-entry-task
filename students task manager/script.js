@@ -240,6 +240,8 @@ function renderTasks() {
             document.createElement("li");
 
         listItem.classList.add("task-item");
+        listItem.id = `task-${task.id}`;
+        listItem.tabIndex = -1;
 
 
         // Add completed class
@@ -511,6 +513,13 @@ filterButtons.forEach(
 function searchTasks() {
 
     renderTasks();
+
+    const firstResult = taskList.querySelector(".task-item");
+
+    if (firstResult) {
+        firstResult.scrollIntoView({ behavior: "smooth", block: "center" });
+        firstResult.focus({ preventScroll: true });
+    }
 }
 
 
