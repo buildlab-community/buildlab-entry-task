@@ -14,27 +14,27 @@
 ======================================== */
 
 :root {
-    --primary: #635bff;
-    --primary-dark: #5048d8;
-    --primary-light: #8b85ff;
+    --primary: #171717;
+    --primary-dark: #000000;
+    --primary-light: #555555;
 
-    --background: #f5f7ff;
-    --surface: rgba(255, 255, 255, 0.88);
+    --background: #f5f5f5;
+    --surface: #ffffff;
     --surface-solid: #ffffff;
 
-    --text: #171a2b;
-    --muted: #73778c;
+    --text: #171717;
+    --muted: #686868;
 
-    --border: #e7e9f2;
+    --border: #dedede;
 
-    --success: #10b981;
-    --success-light: #dff8ee;
+    --success: #252525;
+    --success-light: #eeeeee;
 
-    --warning: #f59e0b;
-    --warning-light: #fff4d8;
+    --warning: #252525;
+    --warning-light: #eeeeee;
 
-    --danger: #ef4444;
-    --danger-light: #ffe5e5;
+    --danger: #252525;
+    --danger-light: #eeeeee;
 
     --shadow:
         0 20px 50px rgba(31, 35, 60, 0.08);
@@ -42,7 +42,7 @@
     --shadow-small:
         0 8px 25px rgba(31, 35, 60, 0.07);
 
-    --radius: 20px;
+    --radius: 12px;
 }
 
 body {
@@ -57,56 +57,13 @@ body {
         "Segoe UI",
         sans-serif;
 
-    background:
-        radial-gradient(
-            circle at 10% 10%,
-            rgba(99, 91, 255, 0.13),
-            transparent 28%
-        ),
-        radial-gradient(
-            circle at 90% 20%,
-            rgba(139, 92, 246, 0.1),
-            transparent 25%
-        ),
-        var(--background);
+    background: var(--background);
 
     color: var(--text);
 
     padding: 40px 20px;
 
     overflow-x: hidden;
-}
-
-
-.background-glow {
-    position: fixed;
-
-    width: 280px;
-    height: 280px;
-
-    border-radius: 50%;
-
-    filter: blur(80px);
-
-    pointer-events: none;
-
-    opacity: 0.25;
-
-    z-index: -1;
-}
-
-.glow-one {
-    background: #635bff;
-
-    top: -100px;
-    left: -100px;
-}
-
-.glow-two {
-    background: #8b5cf6;
-
-    right: -100px;
-    bottom: -100px;
 }
 
 
@@ -150,7 +107,7 @@ body {
     font-weight: 800;
 
     box-shadow:
-        0 10px 25px rgba(99, 91, 255, 0.3);
+        0 8px 18px rgba(0, 0, 0, 0.12);
 }
 
 .eyebrow,
@@ -160,7 +117,7 @@ body {
 
     font-weight: 800;
 
-    letter-spacing: 1.5px;
+    letter-spacing: 0;
 
     color: var(--primary);
 
@@ -172,7 +129,7 @@ body {
 
     line-height: 1;
 
-    letter-spacing: -1.5px;
+    letter-spacing: 0;
 }
 
 .hero-text {
@@ -210,17 +167,17 @@ body {
 .card h2 {
     font-size: 20px;
 
-    letter-spacing: -0.4px;
+    letter-spacing: 0;
 }
 
 
 .task-form {
-    display: flex;
-
-    gap: 10px;
+    display: grid;
+    gap: 13px;
 }
 
 .task-form input,
+.task-form select,
 .search-box input {
     min-width: 0;
 
@@ -228,7 +185,7 @@ body {
 
     border: 1px solid var(--border);
 
-    background: #fafbff;
+    background: #ffffff;
 
     color: var(--text);
 
@@ -248,17 +205,46 @@ body {
 
 .task-form input::placeholder,
 .search-box input::placeholder {
-    color: #a1a5b5;
+    color: #777777;
 }
 
 .task-form input:focus,
+.task-form select:focus,
 .search-box input:focus {
     border-color: var(--primary);
 
     background: white;
 
     box-shadow:
-        0 0 0 4px rgba(99, 91, 255, 0.1);
+        0 0 0 3px rgba(0, 0, 0, 0.08);
+}
+
+.task-form-options {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.form-field {
+    display: grid;
+    gap: 6px;
+}
+
+.form-field label {
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.form-field input,
+.form-field select {
+    width: 100%;
+    min-height: 44px;
+}
+
+.form-actions {
+    display: flex;
+    gap: 8px;
 }
 
 
@@ -267,7 +253,8 @@ button {
 }
 
 #addTaskBtn,
-#searchBtn {
+#searchBtn,
+#cancelEditBtn {
     border: none;
 
     border-radius: 12px;
@@ -292,24 +279,49 @@ button {
 }
 
 #addTaskBtn {
-    padding: 0 22px;
+    padding: 13px 22px;
 }
 
 #searchBtn {
     padding: 0 22px;
 }
 
-#addTaskBtn:hover,
-#searchBtn:hover {
-    transform: translateY(-2px);
+#cancelEditBtn {
+    padding: 0 18px;
+    background: #ffffff;
+    color: var(--text);
+    border: 1px solid var(--border);
+}
 
-    box-shadow:
-        0 10px 22px rgba(99, 91, 255, 0.25);
+#addTaskBtn:hover,
+#searchBtn:hover,
+#cancelEditBtn:hover {
+    filter: brightness(0.88);
 }
 
 #addTaskBtn:active,
-#searchBtn:active {
+#searchBtn:active,
+#cancelEditBtn:active {
     transform: translateY(0);
+}
+
+#addTaskBtn:focus-visible,
+#searchBtn:focus-visible,
+#cancelEditBtn:focus-visible,
+.filter-btn:focus-visible,
+.task-actions button:focus-visible,
+.task-checkbox:focus-visible {
+    outline: 3px solid #777777;
+    outline-offset: 2px;
+}
+
+#addTaskBtn:disabled,
+#searchBtn:disabled,
+#cancelEditBtn:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+    transform: none;
+    box-shadow: none;
 }
 
 #addTaskBtn span {
@@ -380,7 +392,7 @@ button {
 .total-icon {
     color: var(--primary);
 
-    background: rgba(99, 91, 255, 0.1);
+    background: #eeeeee;
 }
 
 .pending-icon {
@@ -473,9 +485,9 @@ button {
 }
 
 .filter-btn:hover {
-    color: var(--primary);
+    color: #000000;
 
-    border-color: rgba(99, 91, 255, 0.35);
+    border-color: #777777;
 }
 
 .filter-btn.active {
@@ -485,8 +497,7 @@ button {
 
     border-color: var(--primary);
 
-    box-shadow:
-        0 5px 14px rgba(99, 91, 255, 0.2);
+    box-shadow: none;
 }
 
 
@@ -503,7 +514,7 @@ button {
 }
 
 .task-badge {
-    background: rgba(99, 91, 255, 0.1);
+    background: #eeeeee;
 
     color: var(--primary);
 
@@ -532,7 +543,6 @@ button {
 
     border-bottom: 1px solid var(--border);
 
-    animation: taskAppear 0.25s ease;
 }
 
 .task-item:last-child {
@@ -549,6 +559,54 @@ button {
     flex: 1;
 
     min-width: 0;
+}
+
+.task-details {
+    min-width: 0;
+}
+
+.task-metadata {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 12px;
+    margin-top: 5px;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.priority-label {
+    font-weight: 700;
+}
+
+.priority-high {
+    color: #111111;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+}
+
+.priority-low {
+    color: #686868;
+}
+
+.due-date-label {
+    color: var(--muted);
+}
+
+.task-item.overdue {
+    border-left: 3px solid #222222;
+    padding-left: 10px;
+}
+
+.task-item.overdue .due-date-label {
+    color: #111111;
+    font-weight: 700;
+}
+
+.task-actions {
+    display: flex;
+    flex-shrink: 0;
+    gap: 6px;
 }
 
 
@@ -578,7 +636,7 @@ button {
 }
 
 .task-item.completed .task-title {
-    color: #a1a5b5;
+    color: #777777;
 
     text-decoration: line-through;
 }
@@ -608,10 +666,24 @@ button {
         transform 0.2s ease;
 }
 
-.delete-btn:hover {
-    background: #ffd1d1;
+.edit-btn {
+    border: 1px solid var(--border);
+    background: #ffffff;
+    color: var(--text);
+    padding: 8px 11px;
+    border-radius: 9px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    flex-shrink: 0;
+}
 
-    transform: translateY(-1px);
+.edit-btn:hover {
+    background: #eeeeee;
+}
+
+.delete-btn:hover {
+    background: #dddddd;
 }
 
 .empty-state {
@@ -632,12 +704,7 @@ button {
 
     border-radius: 18px;
 
-    background:
-        linear-gradient(
-            135deg,
-            rgba(99, 91, 255, 0.12),
-            rgba(139, 92, 246, 0.08)
-        );
+    background: #eeeeee;
 
     color: var(--primary);
 
@@ -700,20 +767,6 @@ footer p {
 
     border: 0;
 }
-
-
-@keyframes taskAppear {
-    from {
-        opacity: 0;
-        transform: translateY(5px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
 
 
 @media (max-width: 700px) {

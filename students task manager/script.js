@@ -5,6 +5,12 @@
 
 const taskInput = document.getElementById("taskInput");
 const addTaskBtn = document.getElementById("addTaskBtn");
+const priorityInput = document.getElementById("priorityInput");
+const dueDateInput = document.getElementById("dueDateInput");
+const taskForm = document.getElementById("taskForm");
+const cancelEditBtn = document.getElementById("cancelEditBtn");
+const formHeading = document.getElementById("formHeading");
+const formModeLabel = document.getElementById("formModeLabel");
 
 const searchInput = document.getElementById("searchInput");
 const searchBtn = document.getElementById("searchBtn");
@@ -28,11 +34,40 @@ const filterButtons = document.querySelectorAll(".filter-btn");
 
 // ---------- APPLICATION STATE ----------
 
-let tasks = JSON.parse(
-    localStorage.getItem("studentTasks")
-) || [];
+function loadTasks() {
+    try {
+        const savedTasks = JSON.parse(
+            localStorage.getItem("studentTasks") || "[]"
+        );
+
+        if (!Array.isArray(savedTasks)) {
+            return [];
+        }
+
+        return savedTasks.filter(function (task) {
+            return task && typeof task === "object";
+        }).map(function (task) {
+            const priority = ["low", "medium", "high"].includes(task.priority)
+                ? task.priority
+                : "medium";
+
+            return {
+                ...task,
+                title: typeof task.title === "string" ? task.title : "",
+                completed: Boolean(task.completed),
+                priority: priority,
+                dueDate: typeof task.dueDate === "string" ? task.dueDate : ""
+            };
+        });
+    } catch (error) {
+        return [];
+    }
+}
+
+let tasks = loadTasks();
 
 let currentFilter = "all";
+let editingTaskId = null;
 
 
 function saveTasks() {
@@ -43,7 +78,8 @@ function saveTasks() {
     );
 }
 
-function addTask() {
+function submitTask(event) {
+    event.preventDefault();
 
     const title = taskInput.value.trim();
 
@@ -64,27 +100,33 @@ function addTask() {
     errorMessage.textContent = "";
 
 
-    // Create task object
-    const newTask = {
+    if (editingTaskId !== null) {
+        const task = tasks.find(function (item) {
+            return item.id === editingTaskId;
+        });
 
-        id: Date.now(),
-
-        title: title,
-
-        completed: false
-    };
-
-
-    // Add task
-    tasks.push(newTask);
+        if (task) {
+            task.title = title;
+            task.priority = priorityInput.value;
+            task.dueDate = dueDateInput.value;
+        }
+    } else {
+        tasks.push({
+            id: Date.now(),
+            title: title,
+            description: "",
+            completed: false,
+            priority: priorityInput.value,
+            dueDate: dueDateInput.value
+        });
+    }
 
 
     // Save task
     saveTasks();
 
 
-    // Clear input
-    taskInput.value = "";
+    resetTaskForm();
 
 
     // Update interface
@@ -93,6 +135,36 @@ function addTask() {
 
     // Put cursor back in input
     taskInput.focus();
+}
+
+function beginEdit(task) {
+    editingTaskId = task.id;
+    taskInput.value = task.title;
+    priorityInput.value = task.priority;
+    dueDateInput.value = task.dueDate;
+    addTaskBtn.innerHTML = "Save Changes";
+    formHeading.textContent = "Edit task";
+    formModeLabel.textContent = "UPDATE TASK";
+    cancelEditBtn.hidden = false;
+    errorMessage.textContent = "";
+    taskInput.focus();
+}
+
+function resetTaskForm() {
+    editingTaskId = null;
+    taskForm.reset();
+    priorityInput.value = "medium";
+    addTaskBtn.innerHTML = "<span>+</span> Add Task";
+    formHeading.textContent = "Add a task";
+    formModeLabel.textContent = "NEW TASK";
+    cancelEditBtn.hidden = true;
+    errorMessage.textContent = "";
+}
+
+function getTodayDate() {
+    const today = new Date();
+    const timezoneOffset = today.getTimezoneOffset() * 60000;
+    return new Date(today.getTime() - timezoneOffset).toISOString().slice(0, 10);
 }
 
 
@@ -176,6 +248,13 @@ function renderTasks() {
             listItem.classList.add("completed");
         }
 
+        const isOverdue =
+            !task.completed && task.dueDate !== "" && task.dueDate < getTodayDate();
+
+        if (isOverdue) {
+            listItem.classList.add("overdue");
+        }
+
 
         // Task content
         const taskContent =
@@ -200,6 +279,11 @@ function renderTasks() {
         );
 
 
+        const taskDetails =
+            document.createElement("div");
+
+        taskDetails.classList.add("task-details");
+
         // Task title
         const taskTitle =
             document.createElement("span");
@@ -207,6 +291,31 @@ function renderTasks() {
         taskTitle.classList.add("task-title");
 
         taskTitle.textContent = task.title;
+
+        const taskMetadata =
+            document.createElement("div");
+
+        taskMetadata.classList.add("task-metadata");
+
+        const priorityLabel =
+            document.createElement("span");
+
+        priorityLabel.classList.add("priority-label", `priority-${task.priority}`);
+        priorityLabel.textContent = `${task.priority[0].toUpperCase()}${task.priority.slice(1)} priority`;
+        taskMetadata.appendChild(priorityLabel);
+
+        if (task.dueDate) {
+            const dueDateLabel = document.createElement("span");
+            dueDateLabel.classList.add("due-date-label");
+            dueDateLabel.textContent = `Due ${new Date(`${task.dueDate}T00:00:00`).toLocaleDateString()}`;
+
+            if (isOverdue) {
+                dueDateLabel.textContent += " · Overdue";
+                dueDateLabel.setAttribute("aria-label", `Due ${task.dueDate}, overdue`);
+            }
+
+            taskMetadata.appendChild(dueDateLabel);
+        }
 
 
         // Delete button
@@ -223,6 +332,12 @@ function renderTasks() {
             "aria-label",
             `Delete ${task.title}`
         );
+
+        const editButton = document.createElement("button");
+        editButton.type = "button";
+        editButton.classList.add("edit-btn");
+        editButton.textContent = "Edit";
+        editButton.setAttribute("aria-label", `Edit ${task.title}`);
 
 
         // Complete / uncomplete task
@@ -258,15 +373,25 @@ function renderTasks() {
             }
         );
 
+        editButton.addEventListener("click", function () {
+            beginEdit(task);
+        });
+
 
         // Build task
         taskContent.appendChild(checkbox);
 
-        taskContent.appendChild(taskTitle);
+        taskDetails.appendChild(taskTitle);
+        taskDetails.appendChild(taskMetadata);
+        taskContent.appendChild(taskDetails);
 
         listItem.appendChild(taskContent);
 
-        listItem.appendChild(deleteButton);
+        const taskActions = document.createElement("div");
+        taskActions.classList.add("task-actions");
+        taskActions.appendChild(editButton);
+        taskActions.appendChild(deleteButton);
+        listItem.appendChild(taskActions);
 
         taskList.appendChild(listItem);
     });
@@ -360,12 +485,14 @@ filterButtons.forEach(
                     function (btn) {
 
                         btn.classList.remove("active");
+                        btn.setAttribute("aria-pressed", "false");
                     }
                 );
 
 
                 // Activate clicked button
                 button.classList.add("active");
+                button.setAttribute("aria-pressed", "true");
 
 
                 // Get selected filter
@@ -407,22 +534,13 @@ searchInput.addEventListener(
 );
 
 
-addTaskBtn.addEventListener(
-    "click",
-    addTask
-);
+taskForm.addEventListener("submit", submitTask);
+
+cancelEditBtn.addEventListener("click", function () {
+    resetTaskForm();
+    taskInput.focus();
+});
 
 
-taskInput.addEventListener(
-    "keydown",
-    function (event) {
-
-        if (event.key === "Enter") {
-
-            addTask();
-        }
-    }
-);
-
-
+saveTasks();
 renderTasks();

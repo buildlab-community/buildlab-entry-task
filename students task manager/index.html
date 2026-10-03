@@ -16,9 +16,6 @@
 
 <body>
 
-    <div class="background-glow glow-one"></div>
-    <div class="background-glow glow-two"></div>
-
     <main class="app">
 
         <!-- HEADER -->
@@ -45,12 +42,12 @@
 
             <div class="section-heading">
                 <div>
-                    <p class="section-label">NEW TASK</p>
-                    <h2>Add a task</h2>
+                    <p id="formModeLabel" class="section-label">NEW TASK</p>
+                    <h2 id="formHeading">Add a task</h2>
                 </div>
             </div>
 
-            <div class="task-form">
+            <form id="taskForm" class="task-form">
 
                 <label for="taskInput" class="sr-only">
                     Enter a task
@@ -61,16 +58,35 @@
                     id="taskInput"
                     placeholder="What do you need to accomplish?"
                     autocomplete="off"
+                    required
                 >
 
-                <button id="addTaskBtn" type="button">
-                    <span>+</span>
-                    Add Task
-                </button>
+                <div class="task-form-options">
+                    <div class="form-field">
+                        <label for="priorityInput">Priority</label>
+                        <select id="priorityInput" name="priority" required>
+                            <option value="low">Low</option>
+                            <option value="medium" selected>Medium</option>
+                            <option value="high">High</option>
+                        </select>
+                    </div>
 
-            </div>
+                    <div class="form-field">
+                        <label for="dueDateInput">Due date</label>
+                        <input type="date" id="dueDateInput" name="dueDate">
+                    </div>
+                </div>
 
-            <p id="errorMessage" class="message error"></p>
+                <div class="form-actions">
+                    <button id="addTaskBtn" type="submit">
+                        <span>+</span>
+                        Add Task
+                    </button>
+                    <button id="cancelEditBtn" type="button" hidden>Cancel</button>
+                </div>
+            </form>
+
+            <p id="errorMessage" class="message error" role="alert"></p>
 
         </section>
 
@@ -142,6 +158,7 @@
                     <button
                         class="filter-btn active"
                         data-filter="all"
+                        aria-pressed="true"
                         type="button"
                     >
                         All
@@ -150,6 +167,7 @@
                     <button
                         class="filter-btn"
                         data-filter="pending"
+                        aria-pressed="false"
                         type="button"
                     >
                         Pending
@@ -158,6 +176,7 @@
                     <button
                         class="filter-btn"
                         data-filter="completed"
+                        aria-pressed="false"
                         type="button"
                     >
                         Completed
