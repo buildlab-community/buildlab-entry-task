@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="A responsive student task manager built with HTML, CSS and JavaScript."
+    >
+
+    <title>Student Task Manager</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Welcome Screen -->
+     <div class="welcome-screen" id="welcomeScreen">
+        <div class="welcome-glow glow-one"></div>
+        <div class="welcome-glow glow-two"></div>
+
+        <div class="welcome-content">
+            <div class="welcome-logo"></div>
+
+            <p class="welcome-label">STUDENT TASK MANAGEMENT</p>
+            <h1>Welcome to <span>TaskFlow</span></h1>
+            <p class="welcome-text">
+                Stay organized, stay focused, and get things done.
+            </p>
+            <div class="welcome-loader">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+     </div>
+
+    <div class="app">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-icon">✓</div>
+
+                <div>
+                    <h2>TaskFlow</h2>
+                    <span>Student Manager</span>
+                </div>
+            </div>
+
+            <nav class="navigation">
+                <button class="nav-item active">
+                    <span>▦</span>
+                    Dashboard
+                </button>
+            </nav>
+
+            <div class="sidebar-footer">
+                <p>Stay organized.</p>
+                <span>One task at a time.</span>
+            </div>
+        </aside>
+
+
+        <!-- Main Content -->
+        <main class="main-content">
+
+            <!-- Top Header -->
+            <header class="topbar">
+
+                <div>
+                    <p class="eyebrow">STUDENT DASHBOARD</p>
+                    <h1>My Tasks</h1>
+                    <p class="subtitle">
+                        Keep track of your work and stay productive.
+                    </p>
+                </div>
+
+                <button class="add-task-btn" id="openModalBtn">
+                    <span>+</span>
+                    Add Task
+                </button>
+
+            </header>
+
+
+            <!-- Statistics -->
+            <section class="stats-grid">
+
+                <div class="stat-card">
+                    <div class="stat-icon total-icon">☰</div>
+
+                    <div>
+                        <p>Total Tasks</p>
+                        <h2 id="totalCount">0</h2>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon pending-icon">◷</div>
+
+                    <div>
+                        <p>Pending</p>
+                        <h2 id="pendingCount">0</h2>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon completed-icon">✓</div>
+
+                    <div>
+                        <p>Completed</p>
+                        <h2 id="completedCount">0</h2>
+                    </div>
+                </div>
+
+            </section>
+
+
+            <!-- Task Section -->
+            <section class="task-section">
+
+                <div class="section-header">
+
+                    <div>
+                        <h2>Your Tasks</h2>
+                        <p>Manage your current tasks below.</p>
+                    </div>
+
+                    <div class="controls">
+
+                        <div class="search-box">
+                            <span>⌕</span>
+
+                            <input
+                                type="text"
+                                id="searchInput"
+                                placeholder="Search tasks..."
+                            >
+                        </div>
+
+                        <select id="filterSelect">
+                            <option value="all">All Tasks</option>
+                            <option value="pending">Pending</option>
+                            <option value="completed">Completed</option>
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Tasks -->
+                <div class="task-list" id="taskList">
+
+                    <div class="empty-state" id="emptyState">
+
+                        <div class="empty-icon">✓</div>
+
+                        <h3>No tasks yet</h3>
+
+                        <p>
+                            Add your first task and start getting things done.
+                        </p>
+
+                        <button id="emptyAddBtn">
+                            Add Your First Task
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <!-- Add Task Modal -->
+    <div class="modal-overlay" id="modalOverlay">
+
+        <div class="modal">
+
+            <div class="modal-header">
+                <div>
+                    <p class="eyebrow">NEW TASK</p>
+                    <h2>Create a Task</h2>
+                </div>
+
+                <button class="close-btn" id="closeModalBtn">
+                    ×
+                </button>
+            </div>
+
+
+            <form id="taskForm">
+
+                <label for="taskInput">
+                    Task title
+                </label>
+
+                <input
+                    type="text"
+                    id="taskInput"
+                    placeholder="e.g. Complete mathematics assignment"
+                    autocomplete="off"
+                >
+
+                <p class="form-error" id="formError"></p>
+
+                <div class="modal-actions">
+
+                    <button
+                        type="button"
+                        class="cancel-btn"
+                        id="cancelBtn"
+                    >
+                        Cancel
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="save-btn"
+                    >
+                        Create Task
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+
+</body>
+</html>
