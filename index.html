@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Task Manager</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <p class="eyebrow">Student task manager</p>
+        <h1>My Tasks</h1>
+      </header>
+
+      <main class="app-card" aria-label="Student task manager application">
+        <form id="task-form" class="task-form" novalidate>
+          <label class="sr-only" for="task-input">Task title</label>
+          <input
+            id="task-input"
+            type="text"
+            maxlength="120"
+            placeholder="Add a new task..."
+            aria-label="Task title"
+          />
+          <button type="submit">Add Task</button>
+        </form>
+
+        <div id="form-feedback" class="feedback" role="status" aria-live="polite"></div>
+
+        <section class="toolbar" aria-label="Task controls">
+          <label class="search-wrap" for="search-input">
+            <span class="sr-only">Search tasks</span>
+            <input
+              id="search-input"
+              type="search"
+              placeholder="Search tasks..."
+              aria-label="Search tasks"
+            />
+          </label>
+
+          <div class="filter-group" role="tablist" aria-label="Filter tasks">
+            <button class="filter-btn active" type="button" data-filter="all" aria-pressed="true">
+              All
+            </button>
+            <button class="filter-btn" type="button" data-filter="pending" aria-pressed="false">
+              Pending
+            </button>
+            <button class="filter-btn" type="button" data-filter="completed" aria-pressed="false">
+              Completed
+            </button>
+          </div>
+        </section>
+
+        <section class="summary" aria-label="Task summary">
+          <article class="summary-card total">
+            <span>Total</span>
+            <strong id="total-count">0</strong>
+          </article>
+          <article class="summary-card pending">
+            <span>Pending</span>
+            <strong id="pending-count">0</strong>
+          </article>
+          <article class="summary-card completed">
+            <span>Completed</span>
+            <strong id="completed-count">0</strong>
+          </article>
+        </section>
+
+        <section class="task-section" aria-live="polite">
+          <ul id="task-list" class="task-list" aria-label="Task list"></ul>
+          <div id="empty-state" class="empty-state" aria-live="polite">
+            No tasks yet. Add your first task to get started.
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
