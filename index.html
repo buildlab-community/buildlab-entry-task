@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Student Task Manager</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<header>
+		<h1>Student Task Manager</h1>
+	</header>
+
+	<main>
+		<section aria-label="Task summary">
+			<dl>
+				<div>
+					<dt>Total Tasks</dt>
+					<dd><span id="totalTasks">0</span></dd>
+				</div>
+				<div>
+					<dt>Pending Tasks</dt>
+					<dd><span id="pendingTasks">0</span></dd>
+				</div>
+				<div>
+					<dt>Completed Tasks</dt>
+					<dd><span id="completedTasks">0</span></dd>
+				</div>
+			</dl>
+		</section>
+
+		<form id="taskForm">
+			<label for="taskInput">New task</label>
+			<input id="taskInput" name="task" type="text" placeholder="Add a new task...">
+			<button type="submit">Add Task</button>
+			<p id="errorMessage" role="alert" aria-live="polite"></p>
+		</form>
+
+		<section aria-label="Task controls">
+			<label for="searchInput">Search tasks</label>
+			<input id="searchInput" type="search" placeholder="Search tasks...">
+			<div role="group" aria-label="Filter tasks">
+				<button type="button" data-filter="all" aria-pressed="true">All</button>
+				<button type="button" data-filter="pending" aria-pressed="false">Pending</button>
+				<button type="button" data-filter="completed" aria-pressed="false">Completed</button>
+			</div>
+		</section>
+
+		<section aria-label="Tasks">
+			<ul id="taskList"></ul>
+			<div id="emptyState" role="status" aria-live="polite"></div>
+		</section>
+	</main>
+
+	<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,449 @@
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+:root {
+	font-family: system-ui, -apple-system, sans-serif;
+	color: #1c3038;
+	background: #eaf2f2;
+	font-synthesis: none;
+	text-rendering: optimizeLegibility;
+	--color-primary: #087e79;
+	--color-primary-hover: #06645f;
+	--color-coral: #e57558;
+	--color-border: rgb(255 255 255 / 76%);
+	--color-muted: #65757b;
+	--color-danger: #a7353c;
+	--color-danger-hover: #84272e;
+	--glass-surface: rgb(255 255 255 / 64%);
+}
+
+body {
+	min-height: 100vh;
+	padding: clamp(2rem, 7vh, 5rem) 1rem 3rem;
+	background-color: #eaf2f2;
+	background-image:
+		linear-gradient(125deg, rgb(105 192 182 / 15%), transparent 42%),
+		linear-gradient(305deg, rgb(238 151 119 / 13%), transparent 38%),
+		repeating-linear-gradient(0deg, rgb(36 81 83 / 3%) 0 1px, transparent 1px 32px),
+		repeating-linear-gradient(90deg, rgb(36 81 83 / 3%) 0 1px, transparent 1px 32px);
+}
+
+header {
+	margin: 0 auto 1.5rem;
+	max-width: 600px;
+	animation: fade-in 650ms ease both;
+}
+
+h1 {
+	color: #193b40;
+	font-size: 2rem;
+	font-weight: 700;
+	line-height: 1.15;
+	text-align: center;
+	text-wrap: balance;
+}
+
+main {
+	position: relative;
+	overflow: hidden;
+	width: min(100%, 600px);
+	margin: 0 auto;
+	padding: 1.5rem;
+	border: 1px solid var(--color-border);
+	border-radius: 8px;
+	background: var(--glass-surface);
+	box-shadow: 0 24px 70px rgb(41 74 76 / 13%), 0 3px 12px rgb(41 74 76 / 5%);
+	backdrop-filter: blur(22px) saturate(145%);
+	-webkit-backdrop-filter: blur(22px) saturate(145%);
+	animation: card-enter 700ms cubic-bezier(0.2, 0.75, 0.25, 1) both;
+}
+
+main::before {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 3px;
+	background: linear-gradient(90deg, #07847c 0%, #5bb4a3 52%, #ea8968 100%);
+	content: "";
+}
+
+main > section,
+main > form {
+	margin-bottom: 1.5rem;
+}
+
+main > section:last-child {
+	margin-bottom: 0;
+}
+
+dl {
+	display: flex;
+	gap: 0.75rem;
+}
+
+dl > div {
+	position: relative;
+	overflow: hidden;
+	flex: 1;
+	min-width: 0;
+	padding: 1rem;
+	border: 1px solid rgb(255 255 255 / 78%);
+	border-radius: 8px;
+	background: rgb(255 255 255 / 52%);
+	box-shadow: 0 5px 16px rgb(47 81 82 / 5%);
+	animation: card-enter 550ms cubic-bezier(0.2, 0.75, 0.25, 1) both;
+}
+
+dl > div:nth-child(1) {
+	animation-delay: 90ms;
+}
+
+dl > div:nth-child(2) {
+	animation-delay: 160ms;
+}
+
+dl > div:nth-child(3) {
+	animation-delay: 230ms;
+}
+
+dl > div::before {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 3px;
+	background: #188c84;
+	content: "";
+}
+
+dl > div:nth-child(2)::before {
+	background: var(--color-coral);
+}
+
+dl > div:nth-child(3)::before {
+	background: #6a9b68;
+}
+
+dt {
+	margin-bottom: 0.35rem;
+	color: var(--color-muted);
+	font-size: 0.875rem;
+	font-weight: 550;
+}
+
+dd {
+	color: #1c4b4d;
+	font-size: 1.5rem;
+	font-weight: 700;
+}
+
+form,
+section[aria-label="Task controls"] {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 0.65rem;
+}
+
+label {
+	flex-basis: 100%;
+	color: #30494d;
+	font-size: 0.9rem;
+	font-weight: 600;
+}
+
+input {
+	min-width: 0;
+	min-height: 2.75rem;
+	padding: 0.65rem 0.8rem;
+	border: 1px solid rgb(93 126 128 / 24%);
+	border-radius: 6px;
+	background: rgb(255 255 255 / 70%);
+	color: inherit;
+	font: inherit;
+	transition: border-color 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+}
+
+form input,
+section[aria-label="Task controls"] > input {
+	flex: 1;
+}
+
+input:hover {
+	border-color: rgb(8 126 121 / 50%);
+}
+
+input:focus {
+	border-color: var(--color-primary);
+	background: #fff;
+	box-shadow: 0 0 0 4px rgb(8 126 121 / 10%);
+}
+
+input::placeholder {
+	color: #79898b;
+}
+
+input:focus-visible,
+button:focus-visible {
+	outline: 3px solid rgb(8 126 121 / 30%);
+	outline-offset: 2px;
+}
+
+button {
+	min-height: 2.5rem;
+	padding: 0.55rem 0.85rem;
+	border: 1px solid transparent;
+	border-radius: 6px;
+	background: var(--color-primary);
+	color: #fff;
+	cursor: pointer;
+	font: inherit;
+	font-size: 0.9rem;
+	font-weight: 600;
+	transition: transform 180ms ease, background-color 180ms ease, border-color 180ms ease, box-shadow 180ms ease, color 180ms ease;
+}
+
+button:hover {
+	transform: translateY(-1px);
+	background: var(--color-primary-hover);
+	box-shadow: 0 4px 10px rgb(14 89 86 / 16%);
+}
+
+button:active {
+	transform: translateY(0);
+}
+
+form button {
+	min-height: 2.75rem;
+	box-shadow: 0 4px 12px rgb(8 126 121 / 15%);
+}
+
+#errorMessage {
+	flex-basis: 100%;
+	min-height: 1.25rem;
+	color: var(--color-danger);
+	font-size: 0.875rem;
+}
+
+section[aria-label="Task controls"] > div {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.4rem;
+	padding: 0.25rem;
+	border: 1px solid rgb(255 255 255 / 80%);
+	border-radius: 8px;
+	background: rgb(255 255 255 / 34%);
+}
+
+[data-filter] {
+	border-color: transparent;
+	background: transparent;
+	color: #40565a;
+}
+
+[data-filter]:hover {
+	border-color: rgb(8 126 121 / 14%);
+	background: rgb(255 255 255 / 72%);
+	box-shadow: none;
+}
+
+[data-filter].active {
+	border-color: var(--color-primary);
+	background: var(--color-primary);
+	color: #fff;
+	box-shadow: 0 3px 9px rgb(8 126 121 / 18%);
+}
+
+#taskList {
+	list-style: none;
+}
+
+#taskList li {
+	display: flex;
+	align-items: center;
+	gap: 0.65rem;
+	padding: 0.85rem 0;
+	border-bottom: 1px solid rgb(83 117 119 / 14%);
+	animation: row-enter 320ms ease both;
+	transition: background-color 160ms ease;
+}
+
+#taskList li:first-child {
+	border-top: 1px solid rgb(83 117 119 / 14%);
+}
+
+#taskList li:hover {
+	background: rgb(255 255 255 / 35%);
+}
+
+.task-status {
+	flex: 0 0 auto;
+	padding: 0.25rem 0.45rem;
+	border: 1px solid rgb(218 162 69 / 20%);
+	border-radius: 5px;
+	background: #fff4df;
+	color: #76571d;
+	font-size: 0.75rem;
+	font-weight: 600;
+}
+
+.completed .task-status {
+	border-color: rgb(76 136 104 / 18%);
+	background: #e8f4ec;
+	color: #27664c;
+}
+
+.completed .task-status::before {
+	margin-right: 0.35rem;
+	content: "\2713";
+	font-weight: 800;
+}
+
+.task-text {
+	flex: 1;
+	min-width: 0;
+	overflow-wrap: anywhere;
+}
+
+.completed .task-text {
+	color: var(--color-muted);
+	opacity: 0.82;
+}
+
+#taskList button {
+	flex: 0 0 auto;
+}
+
+#taskList [data-action="delete"] {
+	border-color: rgb(167 53 60 / 22%);
+	background: rgb(255 255 255 / 62%);
+	color: var(--color-danger);
+}
+
+#taskList [data-action="delete"]:hover {
+	border-color: var(--color-danger-hover);
+	background: var(--color-danger-hover);
+	color: #fff;
+	box-shadow: 0 4px 10px rgb(132 39 46 / 16%);
+}
+
+#emptyState {
+	padding: 1rem 0;
+	color: var(--color-muted);
+	font-size: 0.95rem;
+	text-align: center;
+	animation: fade-in 250ms ease both;
+}
+
+#emptyState:empty {
+	display: none;
+}
+
+@keyframes fade-in {
+	from {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes card-enter {
+	from {
+		transform: translateY(12px);
+		opacity: 0;
+	}
+
+	to {
+		transform: translateY(0);
+		opacity: 1;
+	}
+}
+
+@keyframes row-enter {
+	from {
+		transform: translateY(5px);
+		opacity: 0;
+	}
+
+	to {
+		transform: translateY(0);
+		opacity: 1;
+	}
+}
+
+@media (max-width: 500px) {
+	body {
+		padding: 1.5rem 0.75rem;
+	}
+
+	h1 {
+		font-size: 1.6rem;
+	}
+
+	main {
+		padding: 1rem;
+	}
+
+	main > section,
+	main > form {
+		margin-bottom: 1.15rem;
+	}
+
+	dl {
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+
+	dl > div {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 0.75rem 0.85rem;
+	}
+
+	dt {
+		margin-bottom: 0;
+	}
+
+	dd {
+		font-size: 1.25rem;
+	}
+
+	section[aria-label="Task controls"] > input {
+		flex-basis: 100%;
+	}
+
+	section[aria-label="Task controls"] > div {
+		width: 100%;
+	}
+
+	section[aria-label="Task controls"] > div button {
+		flex: 1;
+	}
+
+	#taskList li {
+		flex-wrap: wrap;
+		gap: 0.5rem;
+	}
+
+	.task-text {
+		flex-basis: calc(100% - 7rem);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		scroll-behavior: auto !important;
+		transition-duration: 0.01ms !important;
+	}
+}
