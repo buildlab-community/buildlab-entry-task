@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Task Manager</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Student Task Manager</h1>
+        <p>Manage your school task easily.</p>
+
+        <!-- Form to add tasks -->
+        <form id="task-form">
+            <input type="text" id="task-input" placeholder="Enter a new task">
+            <button type="submit">Add Task</button>
+        </form>
+
+        <br>
+
+        <!-- Search Box -->
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Search tasks...">
+        </div>
+
+        <br>
+
+        <!-- Filter Buttons -->
+        <div class="filter-buttons">
+            <button id="filter-all" type="button">All</button>
+            <button id="filter-pending" type="button">Pending</button>
+            <button id="filter-completed" type="button">Completed</button>
+        </div>
+
+        <!-- Task Summary / Counters -->
+        <div class="task-summary">
+            <p>Total: <span id="total-count">0</span> | Pending: <span id="pending-count">0</span> | Completed: <span id="completed-count">0</span></p>
+        </div>
+
+        <!-- Feedback message when list or search is empty -->
+        <p id="empty-message" style="display: none; color: #777;"></p>
+
+        <!-- List where tasks appear -->
+        <ul id="task-list"></ul>
+    </div>
+
+    <!-- Script connection -->
+    <script src="script.js"></script>
+</body>
+</html>
